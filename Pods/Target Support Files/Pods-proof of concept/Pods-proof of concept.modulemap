@@ -1,0 +1,6 @@
+framework module Pods_proof_of_concept {
+  umbrella header "Pods-proof of concept-umbrella.h"
+
+  export *
+  module * { export * }
+}
