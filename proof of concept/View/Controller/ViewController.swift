@@ -30,12 +30,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.addSubview(self.refreshControl)
+        callWebservice()
+
     
-        if ((reachability!.whenReachable) != nil){
-            callWebservice()
-        }else{
-            self.showErrorAlert(message: "Please check your internet connection.")
-        }
+//        if ((reachability!.whenReachable) != nil){
+//            callWebservice()
+//        }else{
+//            self.showErrorAlert(message: "Please check your internet connection.")
+//        }
     }
     
     // MARK: - Networking
@@ -84,14 +86,22 @@ extension ViewController : UITableViewDelegate,UITableViewDataSource {
 
         if let title = self.dataViewModel.rows[indexPath.row].title {
             titleLabel.text = title
+        }else {
+            titleLabel.text = ""
+
         }
+        
 
         if let description = self.dataViewModel.rows[indexPath.row].description {
             descriptionLabel.text = description
+        }else {
+            descriptionLabel.text = ""
         }
 
         if let image = self.dataViewModel.rows[indexPath.row].imageHref {
             imageView.sd_setImage(with: URL(string: image), placeholderImage: UIImage(named: "placeholder.png"))
+        }else {
+            imageView.image = UIImage.init(named: "placeholder.png")
         }
 
         return Cell
